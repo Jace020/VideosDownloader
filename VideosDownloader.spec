@@ -4,9 +4,9 @@
 a = Analysis(
     ['VideosDownloader.py'],
     pathex=[],
-    binaries=[],
+    binaries=[('ffmpeg/bin/*', 'ffmpeg/bin')],
     datas=[],
-    hiddenimports=['yt_dlp'],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
