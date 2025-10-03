@@ -8,8 +8,17 @@ from tkinter import ttk
 # ------------------- Variables globales -------------------
 is_downloading = False
 
-# ------------------- Fonctions de téléchargement -------------------
+# ------------------- Mise à jour automatique de yt-dlp -------------------
+def update_yt_dlp():
+    #Vérifie et met à jour yt-dlp au lancement
+    try:
+        #messagebox.showinfo("Mise à jour", "Vérification et mise à jour de yt-dlp...")
+        yt_dlp.main(['-U'])
+        #messagebox.showinfo("Mise à jour", "yt-dlp est à jour ✅")
+    except Exception as e:
+        messagebox.showwarning("Mise à jour", f"Impossible de mettre à jour yt-dlp :\n{e}")
 
+# ------------------- Fonctions de téléchargement -------------------
 def dl_with_ydl(url, format_choice, folder, progress_callback=None):
     """Télécharge en utilisant yt_dlp avec callback de progression"""
     # Chemin vers ffmpeg embarqué (dossier ffmpeg/bin à côté du script/exe)
@@ -40,9 +49,7 @@ def dl_with_ydl(url, format_choice, folder, progress_callback=None):
 
     os.startfile(folder)
 
-
 # ------------------- Interface Tkinter -------------------
-
 def select_folder():
     folder_selected = filedialog.askdirectory()
     if folder_selected:
@@ -125,7 +132,7 @@ screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
 win_width = int(screen_width * 0.2)   # 20% de la largeur de l'écran
-win_height = int(screen_height * 0.25) # 50% de la hauteur (ajustable)
+win_height = int(screen_height * 0.25) # 25% de la hauteur
 x_pos = (screen_width - win_width) // 2
 y_pos = (screen_height - win_height) // 2
 
@@ -161,5 +168,9 @@ btn_dl.pack(pady=10)
 # Barre de progression
 progress_bar = ttk.Progressbar(app, orient=HORIZONTAL, length=int(win_width*0.9), mode='determinate')
 progress_bar.pack(pady=10)
+progress_bar.pack_forget()
+
+# ------------------- Vérification maj yt-dlp -------------------
+threading.Thread(target=update_yt_dlp, daemon=True).start()
 
 app.mainloop()
