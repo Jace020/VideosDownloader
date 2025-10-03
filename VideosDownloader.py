@@ -127,7 +127,6 @@ def on_closing():
 app = Tk()
 app.title("Téléchargeur YouTube")
 
-# ------------------- Fenêtre responsive -------------------
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
