@@ -130,14 +130,11 @@ app.title("Téléchargeur YouTube")
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
 
-win_width = int(screen_width * 0.2)   # 20% de la largeur de l'écran
-win_height = int(screen_height * 0.25) # 25% de la hauteur
+win_width = 400   # largeur en pixels
+win_height = 275  # hauteur en pixels
 x_pos = (screen_width - win_width) // 2
 y_pos = (screen_height - win_height) // 2
-
 app.geometry(f"{win_width}x{win_height}+{x_pos}+{y_pos}")
-
-app.protocol("WM_DELETE_WINDOW", on_closing)
 
 # Label et Entry URL
 Label(app, text="Entrez une URL YouTube :").pack(pady=5)
